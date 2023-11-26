@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise'); // Use 'mysql2/promise' for async/await
 const cors = require('cors'); // Import the cors package
 
 const app = express();
-const port = 3000; // Define the port you want to run the server on
+const port = 3000;
 
 app.use(cors());
 
@@ -15,7 +15,7 @@ const db = mysql.createPool({
   database: 'project',
 });
 
-// Define a route to fetch the most recent data from the MySQL database
+
 app.get('/api/data/latest', async (req, res) => {
   try {
     // Connect to the database
