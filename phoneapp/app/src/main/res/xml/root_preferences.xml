@@ -1,0 +1,44 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"  xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+            app:title="Broker Settings">
+               <EditTextPreference
+                    app:defaultValue="ws://localhost"
+                    app:key="broker_url"
+                    app:singleLine="true"
+                    app:title="Edit IP Address"
+                    app:useSimpleSummaryProvider="true" />
+                <EditTextPreference
+                    app:defaultValue="1884"
+                    app:key="broker_port"
+                    app:singleLine="true"
+                    app:title="Edit Port"
+                    app:useSimpleSummaryProvider="true" />
+        </PreferenceCategory>
+                <PreferenceCategory
+                        app:title="GPS Settings">
+                <SwitchPreference
+                    app:key="fake_gps"
+                    app:summaryOn="Choose Manual Location"
+                    app:summaryOff="Gps Location"
+                    app:defaultValue="false"
+                    app:title="Manual Location"
+                    />
+                <ListPreference
+                    android:dependency="fake_gps"
+                    android:entries="@array/file_names"
+                    android:entryValues="@array/file_values"
+                    android:key="list_preference_1"
+                    android:defaultValue="4"
+                    android:title="Choose between File 1 and 2"
+                    />
+                <EditTextPreference
+                    android:dependency="fake_gps"
+                    app:defaultValue="10"
+                    app:key="time_space"
+                    app:singleLine="true"
+                    app:title="Data send time (sec)"
+                    app:useSimpleSummaryProvider="true"
+                    />
+
+        </PreferenceCategory>
+</PreferenceScreen>
