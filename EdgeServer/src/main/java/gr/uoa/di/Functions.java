@@ -19,6 +19,7 @@ public class Functions {
             dist = Math.acos(dist);
             dist = Math.toDegrees(dist);
             dist = dist * 60 * 1.1515;
+
             if (unit.equals("K")) {
                 dist = dist * 1.609344;
             } else if (unit.equals("N")) {
