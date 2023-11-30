@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    private boolean gps = true;
+    private boolean gps = false;
     private boolean isNWavail=false;
-    private boolean sendnotsnend = true;
+    private boolean sendnotsnend = false;
 
     private String IP, Port, connectCredentials;
     private static final int LOCATION_REQUEST_CODE = 1001;
@@ -367,13 +367,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
+
+                Log.d("debug", message.toString());
                 // Handle incoming notification messages
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastNotificationTime > 6000) {
                     handleNotification(message);
                     lastNotificationTime = currentTime;
                 }
-                Log.d("debug", message.toString());
+
             }
 
             @Override
@@ -387,8 +389,8 @@ public class MainActivity extends AppCompatActivity {
     private void handleNotification(MqttMessage message) throws JSONException {
         String jsonString = new String(message.getPayload());
         JSONObject obj = new JSONObject(jsonString);
-        String dangerLevel = obj.getString("dangerLevel");
-        String distance = obj.getString("distanceFromIotCenter");
+        String dangerLevel = obj.getString("danger");
+        String distance = obj.getString("distance_from_iot");
         dangerMessage(dangerLevel, distance);
         Log.d("debug", "Received notification with danger level " + dangerLevel + " and distance " + distance);
     }
@@ -404,10 +406,10 @@ public class MainActivity extends AppCompatActivity {
         String message = "";
         switch (danger) {
             case "high":
-                message = "High danger risk " + distance + " meters from your location";
+                message = "High danger " + distance + " meters from your location";
                 break;
             case "medium":
-                message = "Medium danger risk " + distance + " meters from your location";
+                message = "Medium danger " + distance + " meters from your location";
                 break;
             default:
                 // Do nothing
@@ -511,7 +513,6 @@ public class MainActivity extends AppCompatActivity {
             // Create a JSON object to hold data
             JSONObject dataObject = new JSONObject();
             // Add device ID to the data object
-            dataObject.put("DeviceID", device_id);
 
             // If GPS is not available
             if (!gps) {
