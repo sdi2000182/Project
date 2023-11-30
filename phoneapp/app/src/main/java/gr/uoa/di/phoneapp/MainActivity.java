@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private long lastNotificationTime = 0;
 
     private MqttAndroidClient client;
-    private static final String NOTIFICATIONSTOPIC = "notifications";
+    private static final String NOTIFICATIONSTOPIC = "android";
     private static final String MESSAGETOPIC = "android";
     private static final int QOS = 0;
     private String clientId;
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 //        IP = sharedPreferences.getString("broker_url", "");
 //        Port = sharedPreferences.getString("broker_port", "");
         IP= "tcp://10.0.2.2";
-        Port="1884";
+        Port="1883";
         connectCredentials = IP + ":" + Port;
         connectToBroker(); // connect to the broker using the IP address and port number
 
@@ -373,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
                     handleNotification(message);
                     lastNotificationTime = currentTime;
                 }
+                Log.d("debug", message.toString());
             }
 
             @Override
@@ -515,39 +516,43 @@ public class MainActivity extends AppCompatActivity {
             // If GPS is not available
             if (!gps) {
                 // Add latitude and longitude from shared preferences to the data object
-                dataObject.put("Latitude", sharedPreferences.getString("Latitude", ""));
-                dataObject.put("Longitude", sharedPreferences.getString("Longitude", ""));
+                dataObject.put("android_id", 1);
+                dataObject.put("latitude", sharedPreferences.getString("Latitude", ""));
+                dataObject.put("longitude", sharedPreferences.getString("Longitude", ""));
             } else {
                 // If GPS is available
                 switch (file_pref) {
                     // Depending on the file preference, add corresponding latitude and longitude from arrays to the data object
                     case "1":
-                        dataObject.put("Latitude", yArray1[manual_timer]);
-                        dataObject.put("Longitude", xArray1[manual_timer]);
+                        dataObject.put("android_id", 1);
+                        dataObject.put("latitude", yArray1[manual_timer]);
+                        dataObject.put("longitude", xArray1[manual_timer]);
                         Log.d("debug", "case 1 " + xArray1[manual_timer]);
                         break;
                     default:
-                        dataObject.put("Latitude", yArray2[manual_timer]);
-                        dataObject.put("Longitude", xArray2[manual_timer]);
+                        dataObject.put("android_id", 1);
+                        dataObject.put("latitude", yArray2[manual_timer]);
+                        dataObject.put("longitude", xArray2[manual_timer]);
                         Log.d("debug", "case 2" + xArray2[manual_timer]);
                         break;
                 }
-            }
 
-            // Create a new MQTT message with the JSON object as payload
-            MqttMessage message = new MqttMessage();
-            message.setPayload(dataObject.toString().getBytes(StandardCharsets.UTF_8));
 
-            // Convert the message payload to a string and log it for debugging
-            String msg = new String(message.getPayload());
-            Log.d("WAKEUP", "Message to be SENT: " + msg);
+                // Create a new MQTT message with the JSON object as payload
+                MqttMessage message = new MqttMessage();
+                message.setPayload(dataObject.toString().getBytes(StandardCharsets.UTF_8));
 
-            try {
-                // Publish the message to the MQTT broker
-                Log.d("debug", "Publishing message to topic: " + MESSAGETOPIC);
-                client.publish(MESSAGETOPIC, message);
-            } catch (MqttException e) {
-                e.printStackTrace();
+                // Convert the message payload to a string and log it for debugging
+                String msg = new String(message.getPayload());
+                Log.d("WAKEUP", "Message to be SENT: " + msg);
+
+                try {
+                    // Publish the message to the MQTT broker
+                    Log.d("debug", "Publishing message to topic: " + MESSAGETOPIC);
+                    client.publish(MESSAGETOPIC, message);
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
