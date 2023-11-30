@@ -31,10 +31,16 @@
             <artifactId>opencsv</artifactId>
             <version>4.1</version>
         </dependency>
+        <!-- Add this dependency to your pom.xml if you are using Maven -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version> <!-- Use the latest version available -->
+        </dependency>
+
 
 
     </dependencies>
-
 
 
 </project>

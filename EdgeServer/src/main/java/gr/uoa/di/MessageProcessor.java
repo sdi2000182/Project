@@ -10,6 +10,8 @@ import org.json.JSONException;
 public class MessageProcessor {
     private IotDevice iotDevice1;
     private IotDevice iotDevice2;
+
+    private AndroidData androidData;
     private double androidLatitude = 0.0;
     private double androidLongitude = 0.0;
     private Connection dbConnection;
@@ -61,14 +63,22 @@ public class MessageProcessor {
             }
         } else if (topic.startsWith("android")) {
             try {
-                JSONObject androidData = new JSONObject(payload);
-                androidLatitude = androidData.getDouble("latitude");
-                androidLongitude = androidData.getDouble("longitude");
-                System.out.println("Received Android location: Lat=" + androidLatitude + ", Lon=" + androidLongitude);
-            } catch (JSONException e) {
-                System.err.println("Error parsing JSON payload on 'android' topic: " + e.getMessage());
-            }
+
+                androidData = new AndroidData(payload);  // Parse Android data from the payload
+                androidData.insertAndroidData(dbConnection);
+
+
+
+
+
+
+            }  catch (JSONException e) {
+            System.err.println("Error parsing JSON payload on 'android' topic: " + e.getMessage());
+            System.err.println("Received JSON payload: " + payload);
+            e.printStackTrace();  // Print the stack trace for detailed information
         }
+
+    }
 
     }
 
