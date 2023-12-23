@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Sensor2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange_light</item>
+        <item name="colorPrimaryVariant">@color/yellow_2</item>
+        <item name="colorOnPrimary">@color/orange_light</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange_light</item>
+        <item name="colorSecondaryVariant">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/orange_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Sensor2.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomAppTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize the colorPrimary to your desired purple color -->
+        <item name="colorPrimary"> @color/orange_light</item> <!-- Adjust this color value to your preferred shade of purple -->
+        <!-- Customize the color of the ActionBar -->
+        <item name="android:colorPrimaryDark">@color/orange_light</item> <!-- Adjust this color value for ActionBar darker shade -->
+
+        <item name = "colorSecondary" > @color/orange_light </item>
+        <item name="android:itemBackground">@color/orange_light </item>
+        <item name="android:actionMenuTextColor">@color/orange_light</item>
+<!--        <item name="android:itemTextAppearance">@style/myCustomMenuTextAppearance</item>-->
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Sensor2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name= "colorPrimary" >@color/orange_light </item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+
+    </style>
+
+
+
+
+    <style name="Theme.Sensor2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="qosTypes">
+        <item>At most once</item>
+        <item>At least once</item>
+        <item>Exactly once</item>
+    </string-array>
+
+    <string-array name="qosLevels">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="locationSUDO">
+        <item>37.96809452684323, 23.76630586399502</item>
+        <item>37.96799937191987, 23.766603589104385</item>
+        <item>37.967779456380754, 23.767174897611685</item>
+        <item>37.96790421900921, 23.76626294807113</item>
+    </string-array>
+
+    <string-array name="locationLevels">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <array name="minmaxSMOKE">
+        <item>0.0</item>
+        <item>0.25</item>
+    </array>
+
+    <array name="minmaxTEMP">
+        <item>-5</item>
+        <item>80</item>
+    </array>
+
+    <array name="minmaxGAS">
+        <item>0.0</item>
+        <item>11.0</item>
+    </array>
+</resources>

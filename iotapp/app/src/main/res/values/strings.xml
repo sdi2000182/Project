@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Sensors</string>
+    <string name="button">Button</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="toggle_button_text"> Toggle </string>
+    <string name="Sensors"> Sensors </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desription">desription</string>
+    <string name="Empty"> </string>
+    <string name="valid_perigrafi">Valid perigrafi</string>
+    <string name="Settings"> Settings </string>
+    <string name="Add_sensor"> Add Sensor</string>
+    <string name="Default_Settings"> Default Settings </string>
+    <string name="Exit_App"> Exit App </string>
+    <string name="WILLtopic">Will Topic</string>
+    <string name="WILLpayload">Will Payload</string>
+    <string name="WILLretain">Will Retain</string>
+    <string name="WILLqoslevel">Will QoS level</string>
+    <string name="sessionId">Session Id</string>
+    <string name="title"> Connection Parameters </string>
+    <string name="tabSmoke">Smoke</string>
+    <string name="tabGas">Gas</string>
+    <string name="tabTemp">Temp</string>
+    <string name="tabUV">UV</string>
+    <string name="simulation">Simulation</string>
+    <string name="LW"> Last Will Parameters </string>
+    <string name="Message">Message</string>
+    <string name="Authentication">Authentication &amp; Security</string>
+    <string name="autoCoords">Auto Coordinates</string>
+    <string name="time_out_time">Time-out</string>
+    <string name="keep_alive_time">Keep-alive</string>
+    <string name="serverIp">Server IP Address</string>
+    <string name="defaultServerIp">176.58.137.176</string>
+    <string name="ServerPort">Server Port</string>
+    <string name="defaultServerPort">1883</string>
+    <string name="qos_level">QoS level</string>
+    <string name="credentials">Credentials</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="ssl">Use SSL</string>
+    <string name="isActive">Active</string>
+    <string name="smokeSensorTextView">Smoke Sensor</string>
+    <string name="gasSensorTextView">Gas Sensor</string>
+    <string name="tempSensorTextView">Temperature Sensor</string>
+    <string name="uvSensorTextView">UV Sensor</string>
+    <string name="empty"> </string>
+    <string name="auto"> Automatic Coordinates </string>
+    <string name="auto_on">Enabled</string>
+    <string name="auto_off">Disabled</string>
+    <string name="DeviceLocation"> Device location</string>
+    <string name="Create" > Create </string>
+
+
+    <string name="qos">QoS</string>
+    <string name="qos0">At most 1</string>
+    <string name="qos1">At least 1</string>
+    <string name="qos2">Exactly 1</string>
+
+    <string name="addSensorButton">Add IOT</string>
+    <string name="uv_sensor">UV Sensor</string>
+
+</resources>

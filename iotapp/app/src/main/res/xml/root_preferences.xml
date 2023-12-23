@@ -1,0 +1,91 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:textColor="#F63100"
+        android:title="Connection Parameters"
+        android:titleCondensed="Connection Parameters">
+<!--        android:layout="@style/PreferenceCategoryTitleStyle"-->
+
+        <EditTextPreference
+            android:layout_width="match_parent"
+            android:dialogMessage="Please enter session ID number"
+            android:persistent="true"
+            app:defaultValue="DEFAULT"
+            app:icon="@drawable/ic_session1"
+            app:key="sessionId"
+            app:title="@string/sessionId"
+            android:textColor="@android:color/black"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:layout_width="match_parent"
+            android:dialogMessage="Suggestion: 1883"
+            android:persistent="true"
+            app:defaultValue="DEFAULT"
+            app:icon="@drawable/ic_port"
+            app:key="@string/ServerPort"
+            app:title="@string/ServerPort"
+            android:textColor="@android:color/black"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:layout_width="match_parent"
+            android:dialogMessage="Please enter the IP address of the server"
+            android:persistent="true"
+            app:defaultValue="DEFAULT"
+            app:icon="@drawable/ic_ip"
+            app:key="@string/serverIp"
+            android:textColor="@android:color/black"
+            app:title="@string/serverIp"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="2"
+            app:entries="@array/qosTypes"
+            app:entryValues="@array/qosLevels"
+            app:icon="@drawable/ic_qos"
+            app:key="qos"
+            app:title="@string/qos_level"
+            app:useSimpleSummaryProvider="true" />
+
+
+        <Preference
+            app:fragment="com.uoa.sensor2.LastWill"
+            app:icon="@android:drawable/ic_menu_send"
+
+            app:key="lastWill"
+            app:title="@string/LW" />
+
+        <Preference
+            android:layout_width="wrap_content"
+            app:fragment="com.uoa.sensor2.SecuritySettings"
+            app:icon="@drawable/ic_lsec1"
+            app:key="Security"
+            app:title="@string/Authentication" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Location">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            app:disableDependentsState="true"
+            app:icon="@drawable/ic_c2"
+            app:key="auto_coords"
+            app:summaryOff="@string/auto_off"
+            app:summaryOn="@string/auto_on"
+            app:title="@string/auto" />
+
+        <ListPreference
+            android:dependency="auto_coords"
+            app:defaultValue="0"
+            app:entries="@array/locationSUDO"
+            app:entryValues="@array/locationLevels"
+            app:icon="@drawable/ic_coords1"
+            app:key="location"
+            app:title="@string/DeviceLocation"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

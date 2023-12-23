@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/preferencesMenu"
+        android:title="@string/Settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/createSensorMenu"
+        android:title="@string/Add_sensor"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/resetSettingsMenu"
+        android:title="@string/Default_Settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/exitMenu"
+        android:title="@string/Exit_App"
+        app:showAsAction="never" />
+
+</menu>

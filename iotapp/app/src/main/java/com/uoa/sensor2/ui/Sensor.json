@@ -1,0 +1,14 @@
+[
+  {
+    "SensorType": "Smoke",
+    "Minimum": "0",
+    "Maximum": "0.25",
+    "SliderValue": "0.13"
+  },
+  {
+    "SensorType": "Gas",
+    "Minimum": "0",
+    "Maximum": "11",
+    "SliderValue": "5.5"
+  }
+]

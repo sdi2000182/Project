@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:textColor="#F63100"
+        android:title="Last Will Parameters"
+        android:titleCondensed="Last Will Parameters">
+        android:layout="@style/PreferenceCategoryTitleStyle"
+
+        <EditTextPreference
+            android:key="WILL TOPIC"
+            app:defaultValue="@string/empty"
+            android:textColor="@android:color/black"
+            app:icon="@drawable/ic_topic"
+            app:title="@string/WILLtopic"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:defaultValue="2"
+            app:entries="@array/qosTypes"
+            app:entryValues="@array/qosLevels"
+            app:icon="@drawable/ic_qos"
+            app:key="last_will_qos"
+            app:title="@string/WILLqoslevel"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:key="last_will_payload"
+            android:textColor="@android:color/black"
+            app:defaultValue="@string/empty"
+            app:icon="@drawable/ic_payload"
+            app:title="@string/WILLpayload"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="Will Retain"
+            app:icon="@drawable/ic_retain" />
+
+
+    </PreferenceCategory>
+
+<!--    TODO ADD SETTINGS BAR ON TOP-->
+    <!--    TODO add option use auth disable username-->
+
+
+</PreferenceScreen>

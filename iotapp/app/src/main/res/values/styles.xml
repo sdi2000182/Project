@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PreferenceCategoryTitleStyle">
+        <item name="android:textSize">18sp</item> <!-- Adjust the font size as needed -->
+        <!-- You can add more style attributes here if desired -->
+    </style>
+
+    <!-- Define a custom theme -->
+    <style name="PurpleMenuItemStyle" parent="@style/Widget.AppCompat.Light.PopupMenu">
+        <!-- Set the background color to purple -->
+        <item name="android:background">@color/orange_light</item>
+        <!-- Set the text color to white -->
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+<!--    <style name="myCustomMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">-->
+<!--        <item name="android:textColor">@android:color/primary_text_dark</item>-->
+<!--    </style>-->
+
+</resources>

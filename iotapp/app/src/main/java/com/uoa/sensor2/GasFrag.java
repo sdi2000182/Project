@@ -1,0 +1,98 @@
+package com.uoa.sensor2;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.google.android.material.slider.Slider;
+
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link GasFrag#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class GasFrag extends Fragment {
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final float ARG_SLIDER_VALUE = 5.5f;
+    private static final float ARG_MINIMUM = 0.0f;
+    private static final float ARG_MAXIMUM = 11.0f;
+
+    // TODO: Rename and change types of parameters
+    private float SliderValue;
+    private float Minimum;
+    private float Maximum;
+
+    public GasFrag() {
+        // Required empty public constructor
+    }
+
+
+    // TODO: Rename and change types and number of parameters
+    public static GasFrag newInstance(float sliderValue, float minimum, float maximum) {
+        GasFrag fragment = new GasFrag();
+        Bundle args = new Bundle();
+        args.putFloat("ARG_SLIDER_VALUE", sliderValue);
+        args.putFloat("ARG_MINIMUM", minimum);
+        args.putFloat("ARG_MAXIMUM", maximum);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
+        Slider slider = view.findViewById(R.id.gasSensorSlider);
+        slider.setValueFrom(getMinimum());
+        slider.setValueTo(getMaximum());
+        slider.setValue(getSliderValue());
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            SliderValue = getArguments().getFloat("ARG_SLIDER_VALUE");
+            Minimum = getArguments().getFloat("ARG_MINIMUM");
+            Maximum = getArguments().getFloat("ARG_MAXIMUM");
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.gas, container, false);
+    }
+    public Float getMinimum() {
+        return Minimum;
+    }
+    public void setMinimum(Float Minimum) {
+        this.Minimum = Minimum;
+    }
+
+
+
+    public Float getMaximum() {
+        return Maximum;
+    }
+
+    public void setMaximum(Float max) {
+        this.Maximum = Maximum;
+    }
+
+    public Float getSliderValue() {
+        return SliderValue;
+    }
+
+    public void setSlider(Float SliderValue) {
+        this.SliderValue = SliderValue;
+    }
+}
