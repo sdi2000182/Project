@@ -49,7 +49,7 @@ public class MessageProcessor {
 
             IotDevice currentIotDevice = topic.startsWith("iot_device1") ? iotDevice1 : iotDevice2;
             currentIotDevice.handleMessage(payload);
-           // Functions.alertAndroid(topic, currentIotDevice.getDanger(), client);
+
             double distanceToCurrentIot = currentIotDevice.calculateDistanceToAndroid(androidLatitude,androidLongitude);
 
 
@@ -68,16 +68,18 @@ public class MessageProcessor {
             eventData.insertData(dbConnection, iotDeviceNumber, latitudeValue, longitudeValue, smokeValue, gasValue, temperatureValue, uvValue, currentIotDevice.getDanger());
 
 
-             try {
+            try {
+                double[] midpoint = checkAndPrintHighDanger(iotDevice1.getDanger(), iotDevice2.getDanger(), client);
 
-                 currentIotDevice.alertDistanceToAndroid(client, distanceToCurrentIot, androidData.getAndroidId(), currentIotDevice.getDanger(), iotDeviceNumber);
-
-
-                checkAndPrintHighDanger(iotDevice1.getDanger(), iotDevice2.getDanger(), client);
+                if (midpoint != null) {
+                    currentIotDevice.alertDistanceToAndroid(client, calculateDistanceToMidpoint(midpoint), androidData.getAndroidId(), currentIotDevice.getDanger(), iotDeviceNumber);
+                } else {
+                    currentIotDevice.alertDistanceToAndroid(client, distanceToCurrentIot, androidData.getAndroidId(), currentIotDevice.getDanger(), iotDeviceNumber);
+                }
             } catch (MqttException e) {
-
                 e.printStackTrace();
             }
+
         }
 
     }
@@ -106,10 +108,12 @@ public class MessageProcessor {
         }
     }
 
-    private void checkAndPrintHighDanger(String danger1, String danger2, MqttClient client) {
-        if (IotDevice.checkHighDanger(danger1, danger2) ) {
+    private double[] checkAndPrintHighDanger(String danger1, String danger2, MqttClient client) {
+        double[] midpoint = null;
+
+        if (IotDevice.checkHighDanger(danger1, danger2)) {
             // Calculate the midpoint
-            double[] midpoint = IotDevice.calculateMidpoint(iotDevice1.getLatitude(), iotDevice1.getLongitude(), iotDevice2.getLatitude(), iotDevice2.getLongitude());
+            midpoint = IotDevice.calculateMidpoint(iotDevice1.getLatitude(), iotDevice1.getLongitude(), iotDevice2.getLatitude(), iotDevice2.getLongitude());
 
             String message = "Both IoT devices have a high danger level. Midpoint distance: " + calculateDistanceToMidpoint(midpoint) + " meters";
 
@@ -128,7 +132,10 @@ public class MessageProcessor {
                 e.printStackTrace();
             }
         }
+
+        return midpoint;
     }
+
 
     private double calculateDistanceToMidpoint(double[] midpoint) {
         // Calculate the distance from the Android to the midpoint
