@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         toggleHelp();
 
         String servUri = "tcp://" + getResources().getString(R.string.defaultServerIp) + ":" + getResources().getString(R.string.defaultServerPort);
+        System.out.println("ahamm" + servUri);
         establishConnect();
         try{
             connect = new Connect(servUri, getStringfunc("sessionId"), new MemoryPersistence(), this, MQCL);
@@ -152,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
+                System.out.println("did i press exit what??");
                 beforeExit();
 
             }
@@ -246,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         // Get the default SharedPreferences instance
         SharedPreferences sharedPreferences = getDefaultSharedPreferences(this);
 
-        return sharedPreferences.getString(key, "DEFAULT");
+        return sharedPreferences.getString(key, "-1");
     }
 
     private Integer getInteger(String key) {
@@ -351,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     private void failedConnect(){
         //toggle button
         toggleOff();
-        System.err.println("Failed connection to"+ connect.getServerUri());
+        System.out.println("Failed connection to"+ connect.getServerUri());
         if(!connect.isInternetServiceAvailable()){
             Toast.makeText(this,"Connection failure no internet connection",Toast.LENGTH_SHORT).show();
         }
@@ -431,20 +433,20 @@ public class MainActivity extends AppCompatActivity {
                 //startActivityForResult(new Intent(this, SensorActivity.class), SENSORCODE);
                 return true;
             }
-            else if (item.getItemId() == R.id.resetSettingsMenu) {
-                String sessionId = getStringfunc("sessionId");
-//                boolean isDarkThemeOn = getBool("dark_theme");
-                getDefaultSharedPreferences(this).edit().clear().apply();
-                // Restore the session ID
-                setStringPreference("sessionId", sessionId);
-                // Restore the selected theme
-                //setBoolPreference("dark_theme", isDarkThemeOn);
-                // Delete all extralistOfSensors
-                if (listOfSensors.size() > 2)
-                    listOfSensors.subList(2, listOfSensors.size()).clear();
-                refreshApp();
-                return true;
-            }
+//            else if (item.getItemId() == R.id.resetSettingsMenu) {
+//                String sessionId = getStringfunc("sessionId");
+//                System.out.println("sessis" + sessionId);
+//                getDefaultSharedPreferences(this).edit().clear().apply();
+//                System.out.println("I am restoring session Id");
+//                setStringPreference("sessionId", sessionId);
+//                System.out.println("i have restored session");
+//                if (listOfSensors.size() > 2)
+//                    listOfSensors.subList(2, listOfSensors.size()).clear();
+//                System.out.println("set default");
+//                refreshApp();
+//                System.out.println("refreshed");
+//                return true;
+//            }
             else if (item.getItemId() == R.id.exitMenu) {
                 jsonify.putJson(this, jsonFile, listOfSensors);
                 beforeExit();
@@ -523,7 +525,7 @@ public class MainActivity extends AppCompatActivity {
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        MyAdapter myAdapter = new MyAdapter(fragmentManager);
         MyAdapter myadapter = new MyAdapter(MainActivity.this);
-        if (getStringfunc("sessionId").equals("DEFAULT")) {
+        if (getStringfunc("sessionId").equals("-1")) {
             System.out.println("Entered correctly\n");
             // If this is the first run of the app, load the defaultlistOfSensors
             setStringPreference("sessionId", String.valueOf(new Random().nextInt(10000)));
@@ -556,12 +558,11 @@ public class MainActivity extends AppCompatActivity {
             switch (listOfSensors.get(sensor).getSensorType()) {
                 case "Smoke":
                     fragment = new SmokeFrag();
-                    if(fragment==null){
-                        System.out.println("Nayeon");
-                    }
-                    else{
-
-                    }
+//                    if(fragment==null){
+//                    }
+//                    else{
+//
+//                    }
                     myadapter.addFragment(fragment, getResources().getString(R.string.tabSmoke) + " " + ++smokeCounter);
                     break;
                 case "Gas":

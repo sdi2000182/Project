@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:dialogMessage="Please enter session ID number"
             android:persistent="true"
-            app:defaultValue="DEFAULT"
+            app:defaultValue="-1"
             app:icon="@drawable/ic_session1"
             app:key="sessionId"
             app:title="@string/sessionId"
@@ -22,22 +22,21 @@
             android:layout_width="match_parent"
             android:dialogMessage="Suggestion: 1883"
             android:persistent="true"
-            app:defaultValue="DEFAULT"
+            app:defaultValue="-1"
             app:icon="@drawable/ic_port"
-            app:key="@string/ServerPort"
+            app:key="ServerPort"
             app:title="@string/ServerPort"
             android:textColor="@android:color/black"
             app:useSimpleSummaryProvider="true" />
         <EditTextPreference
-            android:layout_width="match_parent"
-            android:dialogMessage="Please enter the IP address of the server"
+            android:dialogMessage="Example: test.mosquitto.org"
+            android:key="ServerIp"
             android:persistent="true"
-            app:defaultValue="DEFAULT"
+            android:title="@string/serverIp"
+            app:defaultValue="@string/defaultServerIp"
             app:icon="@drawable/ic_ip"
-            app:key="@string/serverIp"
-            android:textColor="@android:color/black"
-            app:title="@string/serverIp"
             app:useSimpleSummaryProvider="true" />
+
 
         <ListPreference
             app:defaultValue="2"

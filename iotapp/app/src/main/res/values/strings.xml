@@ -30,7 +30,7 @@
     <string name="time_out_time">Time-out</string>
     <string name="keep_alive_time">Keep-alive</string>
     <string name="serverIp">Server IP Address</string>
-    <string name="defaultServerIp">176.58.137.176</string>
+    <string name="defaultServerIp">10.0.2.2</string>
     <string name="ServerPort">Server Port</string>
     <string name="defaultServerPort">1883</string>
     <string name="qos_level">QoS level</string>

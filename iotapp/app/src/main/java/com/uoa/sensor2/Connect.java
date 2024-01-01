@@ -123,24 +123,19 @@ public class Connect extends MqttAsyncClient {
                 case "sessionId":
                     setSessionID(entry.getValue());
                     break;
-                case "server_ip":
+                case "ServerIp":
+                    System.out.println("entered serverIP this is correct");
                     setServerIp(entry.getValue());
                     setServerUri("tcp://" + getServerIp() + ":" + getServerPort());
                     break;
-                case "server_port":
+                case "ServerPort":
                     setServerPort(Integer.parseInt(entry.getValue()));
                     setServerUri("tcp://" + getServerIp() + ":" + getServerPort());
                     break;
                 case "qos":
                     setQos(Integer.parseInt(String.valueOf(entry.getValue())));
                     break;
-                case "time_out_time":
-                    setTimeOutTime(Integer.parseInt(String.valueOf(entry.getValue())));
-                    break;
-                case "keep_alive_time":
-                    setKeepAliveTime(Integer.parseInt(String.valueOf(entry.getValue())));
-                    break;
-                case "last_will_topic":
+                case "WILL TOPIC":
                     setLastWillTopic(entry.getValue());
                     break;
                 case "last_will_payload":

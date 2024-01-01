@@ -12,10 +12,10 @@
         android:title="@string/Add_sensor"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/resetSettingsMenu"
-        android:title="@string/Default_Settings"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/resetSettingsMenu"-->
+<!--        android:title="@string/Default_Settings"-->
+<!--        app:showAsAction="never" />-->
 
     <item
         android:id="@+id/exitMenu"

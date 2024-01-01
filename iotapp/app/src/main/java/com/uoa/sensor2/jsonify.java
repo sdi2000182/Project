@@ -51,7 +51,6 @@ public class jsonify {
                 e.printStackTrace();
             }
         }
-        System.out.println("wie gehts\n");
         return gson.fromJson(sb.toString(), sensorListType);
 
     }

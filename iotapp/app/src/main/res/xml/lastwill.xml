@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:defaultValue="false"
             android:title="Will Retain"
+            android:key="last_will_retain"
             app:icon="@drawable/ic_retain" />
 
 

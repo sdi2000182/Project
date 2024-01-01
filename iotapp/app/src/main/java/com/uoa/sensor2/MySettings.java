@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import java.util.Objects;
@@ -32,13 +33,15 @@ public class MySettings extends AppCompatActivity implements SharedPreferences.O
             preferences.registerOnSharedPreferenceChangeListener(this);
 
 //        this.sessionId = Integer.parseInt(readStringSetting("session_id"));
-        if (getStringfunc("sessionId").equals("DEFAULT")) this.sessionId = new Random().nextInt(10000);
-        else this.sessionId = Integer.parseInt(getStringfunc("sessionId"));
-        setString("session_id", String.valueOf(sessionId));
+//        if (getStringfunc("sessionId").equals("-1")) this.sessionId = new Random().nextInt(10000);
+//        else this.sessionId = Integer.parseInt(getStringfunc("sessionId"));
+//        setString("session_id", String.valueOf(sessionId));
+        this.sessionId = Integer.parseInt(getStringfunc("session_id"));
     }
 
     public boolean onSupportNavigateUp() {
         if (getSupportFragmentManager().popBackStackImmediate()) return true;
+        System.out.println("Navigation error");
         return super.onSupportNavigateUp();
     }
 
@@ -93,9 +96,10 @@ public class MySettings extends AppCompatActivity implements SharedPreferences.O
 //            case "qos":
 //
 //                break;
-//            case "serverIp":
-//
-//                break;
+            case "ServerIp":
+                  System.out.println("entered serverip");
+                  refreshApp();
+                  break;
 //            case "Authentication":
 //
 //                break;
@@ -120,7 +124,7 @@ public class MySettings extends AppCompatActivity implements SharedPreferences.O
         // Get the default SharedPreferences instance
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        return sharedPreferences.getString(key, "DEFAULT");
+        return sharedPreferences.getString(key, "-1");
     }
     @Override
     protected void onDestroy() {
@@ -166,16 +170,52 @@ public class MySettings extends AppCompatActivity implements SharedPreferences.O
         // Commit the changes by applying them synchronously
         editor.apply();
     }
+//change here
+//    private void refreshApp() {
+//        // Create an Intent for the SettingsActivity class
+//        Intent intent = new Intent(this, com.uoa.sensor2.MySettings.class);
+//
+//        // Set flags to clear the previous activities in the stack and start the new activity
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//        // Start the new activity
+//        startActivity(intent);
+//    }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        public SettingsFragment() {
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey);
+        }
+    }
+
+    public static class LastWillSettings extends PreferenceFragmentCompat {
+        public LastWillSettings() {
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.lastwill, rootKey);
+        }
+    }
+
+    public static class SecuritySettings extends PreferenceFragmentCompat {
+        public SecuritySettings() {
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.securityprefs, rootKey);
+        }
+    }
 
     private void refreshApp() {
-        // Create an Intent for the SettingsActivity class
-        Intent intent = new Intent(this, com.uoa.sensor2.MySettings.class);
-
-        // Set flags to clear the previous activities in the stack and start the new activity
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        // Start the new activity
-        startActivity(intent);
+        finish();
+        startActivity(new Intent(this, com.uoa.sensor2.MySettings.class));
+        overridePendingTransition(0, 0);
     }
 
 
