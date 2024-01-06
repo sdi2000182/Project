@@ -47,7 +47,7 @@ public class IotDevice {
         } else if (gas > 9.15) {
             danger = "high";
         } else {
-            //danger = "low";
+            danger = "low";
         }
     }
     public String getDanger() {
