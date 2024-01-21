@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sensor2"
+rootProject.name = "My Application"
 include(":app")
+ 
