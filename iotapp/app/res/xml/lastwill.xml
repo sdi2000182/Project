@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        android:key="last_will_topic"
+        app:defaultValue="@string/empty"
+        app:icon="@drawable/ic_topic"
+        android:textColor="@android:color/black"
+        app:title="lwTopic"
+        app:useSimpleSummaryProvider="true" />
+
+    <EditTextPreference
+        android:key="last_will_payload"
+        app:defaultValue="@string/empty"
+        app:icon="@drawable/ic_payload"
+        app:title="@string/lwPayload"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        app:defaultValue="2"
+        app:entries="@array/qosTypes"
+        app:entryValues="@array/qosLevels"
+        app:icon="@drawable/ic_qos"
+        app:key="last_will_qos"
+        app:title="@string/lwQOS"
+        app:useSimpleSummaryProvider="true" />
+
+    <CheckBoxPreference
+        android:key="last_will_retain"
+        app:defaultValue="false"
+        app:icon="@drawable/ic_retain"
+        app:title="@string/lwRetain" />
+
+</PreferenceScreen>

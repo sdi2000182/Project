@@ -1,0 +1,58 @@
+<resources>
+
+    <string name="name">IOT App </string>
+    <string name="settings">Settings</string>
+    <string name="createSensor">Add Sensor</string>
+    <string name="titleSmoke">Smoke</string>
+    <string name="titleGas">Gas</string>
+    <string name="titleTemp">Temp</string>
+    <string name="titleUv">UV</string>
+    <string name="lw">Last Will Message</string>
+    <string name="authentication">Authentication &amp; Security</string>
+    <string name="autoCoords">Auto Coordinates</string>
+    <string name="sessionId">Session ID</string>
+    <string name="serverIp">Server IP Address</string>
+    <string name="defaultServerIp">10.0.2.2</string>
+    <string name="serverPort">Server Port</string>
+    <string name="defaultServerPort">1883</string>
+    <string name="qosLevel">QoS level</string>
+    <string name="lwPayload">Payload</string>
+    <string name="lwRetain">Retain</string>
+    <string name="lwQOS">QoS level</string>
+    <string name="credentials"> Credentials</string>
+    <string name="setusername">Username</string>
+    <string name="setpassword">Password</string>
+    <string name="ssl">Use SSL</string>
+
+    <string name="autoOn">Enabled</string>
+    <string name="autoOff">Disabled</string>
+    <string name="deviceLocation">Device location</string>
+    <string name="temp_sensor_description">Description of Temperature Sensor</string>
+    <string name="temp_sensor_active_description">Description of Temperature Sensor Active</string>
+    <string name="temp_sensor_check_description">Description of Temperature Sensor Check</string>
+    <string name="temp_sensor_slider_description">Description of Temperature Sensor Slider</string>
+    <string name="smoke_sensor_description">Description of Smoke Sensor</string>
+    <string name="smoke_sensor_active_description">Description of Smoke Sensor Active</string>
+    <string name="smoke_sensor_check_description">Description of Smoke Sensor Check</string>
+    <string name="smoke_sensor_slider_description">Description of Smoke Sensor Slider</string>
+    <string name="gas_sensor_description">Description of Gas Sensor</string>
+    <string name="gas_sensor_active_description">Description of Gas Sensor Active</string>
+    <string name="gas_sensor_check_description">Description of Gas Sensor Check</string>
+    <string name="gas_sensor_slider_description">Description of Gas Sensor Slider</string>
+
+    <string name="sensorActive">Active</string>
+    <string name="smoke1">Smoke Sensor</string>
+    <string name="gas1">Gas Sensor</string>
+    <string name="temp1">Temperature Sensor</string>
+    <string name="uv1">UV Sensor</string>
+    <string name="create">Create</string>
+    <string name="empty" />
+    <string name="activate_tethering">Activate Tethering</string>
+    <string name="vp_description">" "</string>
+    <string name="tabs_description">" "</string>
+    <string name="uv_slider_description" />
+    <string name="uv_check_description" />
+    <string name="sensor_active_description" />
+    <string name="uv1_description" />
+
+</resources>
