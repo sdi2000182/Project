@@ -3,23 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/preferencesMenu"
-        android:title="@string/Settings"
+        android:id="@+id/settingsOpt"
+        android:title="Settings"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/createSensorMenu"
-        android:title="@string/Add_sensor"
+        android:id="@+id/createOpt"
+        android:title="Add sensor"
         app:showAsAction="never" />
 
-<!--    <item-->
-<!--        android:id="@+id/resetSettingsMenu"-->
-<!--        android:title="@string/Default_Settings"-->
-<!--        app:showAsAction="never" />-->
 
     <item
-        android:id="@+id/exitMenu"
-        android:title="@string/Exit_App"
+        android:id="@+id/exitOpt"
+        android:title="Exit"
         app:showAsAction="never" />
 
 </menu>

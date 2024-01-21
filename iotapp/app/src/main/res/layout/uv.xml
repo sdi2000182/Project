@@ -1,63 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:theme="@style/Theme.MaterialComponents.Light"
-    android:padding="48dp"
-    tools:context=".UVFrag">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="25dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/createUvSensor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/UVSENSOR"
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:text="@string/uvSensorTextView"
-            android:textColor="@color/orange_light"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/UVSensorSlider"
-            android:layout_width="251dp"
-            android:layout_height="57dp"
-            android:valueFrom="0f"
-            android:valueTo="11f"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UVSENSOR"
-            app:layout_constraintVertical_bias="0.109"
-            app:values="@array/minmaxGAS" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/UVswitcharoo"
-            android:layout_width="100dp"
-            android:trackTint="@color/orange_light"
-            android:thumbTint="@color/orange_light"
-            android:layout_height="51dp"
-            android:backgroundTint="#673AB7"
-            android:buttonTint="#673AB7"
-            android:text="@string/isActive"
-            android:textColor="@color/orange_light"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/UVSensorSlider"
-            app:layout_constraintVertical_bias="0.109" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/uv1"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:contentDescription="@string/uv1_description" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/uvSensorSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:valueFrom="0f"
+        android:valueTo="11f"
+        app:values="@array/minmaxUV"
+        android:contentDescription="@string/uv_slider_description" />
+
+
+    <TextView
+        android:id="@+id/uvActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/sensorActive"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:contentDescription="@string/sensor_active_description" />
+
+    <CheckBox
+        android:id="@+id/uvCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@android:color/holo_blue_dark"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        android:contentDescription="@string/uv_check_description" />
+
+</LinearLayout>
