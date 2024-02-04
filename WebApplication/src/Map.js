@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import redDangerIcon from './red-danger.png';
 import orangeDangerIcon from './orange-danger.png';
+import androidIcon from './android.png';
 
-function Map({ data }) {
+function Map({ data, androidData }) {
+
+
+
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [infoWindows, setInfoWindows] = useState([]);
   const [circles, setCircles] = useState([]);
   const [deviceDanger, setDeviceDanger] = useState({
-    1: 'low', // Default danger level for device 1
-    2: 'low', // Default danger level for device 2
+    1: 'low',
+    2: 'low',
   })
-  const [polygons, setPolygons] = useState([]); // Declare polygons array
-  // Create custom marker icons
+  const [polygons, setPolygons] = useState([]);
+
+  // Icons for the markers
   const redIcon = {
     url: redDangerIcon,
-    scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+    scaledSize: new window.google.maps.Size(40, 40),
   };
 
   const orangeIcon = {
     url: orangeDangerIcon,
-    scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+    scaledSize: new window.google.maps.Size(40, 40),
+  };
+
+  const androidMarkerIcon = {
+    url: androidIcon,
+    scaledSize: new window.google.maps.Size(40, 40),
   };
 
 
-
-
+  // Map rendering
   useEffect(() => {
     if (!map) {
       const newMap = new window.google.maps.Map(document.getElementById('map'), {
@@ -36,13 +45,15 @@ function Map({ data }) {
     }
   }, [map]);
 
+  // Iot Devices handling
   useEffect(() => {
+
     if (map && data) {
       data.forEach((deviceData) => {
         const deviceID = deviceData.Iot_Device;
-
         // Update the danger level for the specific device
         deviceDanger[deviceID] = deviceData.Danger;
+
 
         const existingMarker = markers.find((marker) => marker.get('Iot_Device') === deviceData.Iot_Device);
 
@@ -112,14 +123,55 @@ function Map({ data }) {
   }, [map, data, markers, infoWindows, circles, deviceDanger]);
 
 
-  // Helper function to get the appropriate marker icon
+  // Android Handling
+  useEffect(() => {
+
+    const androidMarkers = [];
+
+    if (map && androidData) {
+
+      androidMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
+
+      androidData.forEach((androidDeviceData) => {
+        const androidMarker = new window.google.maps.Marker({
+          position: { lat: parseFloat(androidDeviceData.Latitude), lng: parseFloat(androidDeviceData.Longitude) },
+          map,
+          title: `Android Device ID: ${androidDeviceData.Android_ID}`,
+          icon: androidMarkerIcon,
+        });
+
+        const infoWindowContent = `
+          <strong>Android Device ID:</strong> ${androidDeviceData.Android_ID}<br />
+          <strong>Latitude:</strong> ${androidDeviceData.Latitude}<br />
+          <strong>Longitude:</strong> ${androidDeviceData.Longitude}<br />
+          <strong>Timestamp:</strong> ${androidDeviceData.Timestamp}<br />
+        `;
+
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: infoWindowContent,
+        });
+
+        androidMarker.addListener('click', () => {
+          infoWindow.open(map, androidMarker);
+        });
+
+
+        androidMarkers.push(androidMarker);
+      });
+    }
+  }, [map, androidData, androidMarkerIcon]);
+
+
+
   const getMarkerIcon = (danger) => {
     if (danger === 'high') {
-      return redIcon; // Use the red icon for high danger
+      return redIcon; // Red icon for high danger
     } else if (danger === 'medium') {
-      return orangeIcon; // Use the orange icon for medium danger
+      return orangeIcon; // Orange icon for medium danger
     } else {
-      // Use a default icon or null for other cases
+
       return null;
     }
   };
@@ -140,6 +192,7 @@ function Map({ data }) {
     `;
   };
 
+  // Circle creating for IoT Devices
   const createCircle = (deviceData) => {
     const fillColor = isDeviceActive(deviceData) ? '#00FF00' : '#FF0000';
     const circle = new window.google.maps.Circle({
@@ -175,15 +228,14 @@ function Map({ data }) {
   };
 
 
-
-
+  // Red danger box creation
   const drawPolygon = () => {
     const device1Marker = markers.find((marker) => marker.get('Iot_Device') === 1);
     const device2Marker = markers.find((marker) => marker.get('Iot_Device') === 2);
 
     polygons.forEach((polygon) => polygon.setMap(null));
 
-    // Ensure that both markers are found and have valid positions
+
     if (device1Marker && device2Marker && device1Marker.getPosition() && device2Marker.getPosition()) {
       const position1 = device1Marker.getPosition();
       const position2 = device2Marker.getPosition();
@@ -213,18 +265,9 @@ function Map({ data }) {
         map,
       });
 
-      // Add the new polygon to the polygons array
       setPolygons([...polygons, polygon]);
-    } else {
-      // Handle the case when one or both markers are missing or have invalid positions
     }
   };
-
-
-
-
-
-
 
 
   return <div id="map" style={{ height: '700px' }}></div>;
