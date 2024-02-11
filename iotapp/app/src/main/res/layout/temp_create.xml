@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text="@string/smoke1"
+            android:text="@string/temp1"
             android:textColor="@color/orange_light"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -32,15 +32,15 @@
             android:id="@+id/TempRange"
             android:layout_width="251dp"
             android:layout_height="57dp"
-            android:valueFrom="0f"
-            android:valueTo="11f"
+            android:valueFrom="-5f"
+            android:valueTo="80f"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:contentDescription="@string/tabs_description"
             app:layout_constraintTop_toBottomOf="@+id/createTempSensor"
             app:layout_constraintVertical_bias="0.109"
-            app:values="@array/minmaxGAS" />
+            app:values="@array/MinimumMaximumTEMP" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/TempButton"

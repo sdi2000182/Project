@@ -2,16 +2,14 @@ package com.uoa.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MySettings extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     int sessionId;
 
@@ -30,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-        this.sessionId = Integer.parseInt(readStringSetting("sessionId"));
+        this.sessionId = Integer.parseInt(getStringFunc("sessionId"));
     }
 
     @Override
@@ -44,14 +42,11 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
         // Update connection values
         switch (key) {
-            case "time_out_time":
-                // Add desired handling
-                break;
             case "sessionId":
-                if (isNumeric(readStringSetting(key))) {
-                    sessionId = Integer.parseInt(readStringSetting(key));
+                if (isNumeric(getStringFunc(key))) {
+                    sessionId = Integer.parseInt(getStringFunc(key));
                 } else {
-                    setStringSetting(key, String.valueOf(sessionId));
+                    setStringFunc(key, String.valueOf(sessionId));
                     refreshUI();
                     Toast.makeText(this, "Please provide a numeric ID", Toast.LENGTH_LONG).show();
                 }
@@ -65,9 +60,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             case "location":
                 // Add desired handling
                 break;
-            case "ssl":
-                // Add desired handling
-                break;
             case "lwPayload":
                 // Add desired handling
                 break;
@@ -75,6 +67,12 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 // Add desired handling
                 break;
             case "lwQOS":
+                // Add desired handling
+                break;
+            case "ssl":
+                // Add desired handling
+                break;
+            case "username":
                 // Add desired handling
                 break;
             case "password":
@@ -86,21 +84,19 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             case "serverIp":
                 refreshUI();
                 break;
-            case "use_auth":
+            case "useAuth":
                 // Add desired handling
                 break;
             case "serverPort":
-                if (!isNumeric(readStringSetting(key))) {
-                    setStringSetting(key, String.valueOf(1883));
+                if (!isNumeric(getStringFunc(key))) {
+                    setStringFunc(key, String.valueOf(1883));
                     refreshUI();
                     Toast.makeText(this, "Port number must be an integer", Toast.LENGTH_LONG).show();
                 } else {
                     // Add desired handling
                 }
                 break;
-            case "username":
-                // Add desired handling
-                break;
+
             default:
                 break;
         }
@@ -155,55 +151,36 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         }
     }
 
-    private void toggleTheme(String key) {
 
-        if ((this.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO) {
-            try {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(key, true).apply();
-                Toast.makeText(this, "Dark theme enabled", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(key, false).apply();
-                Toast.makeText(this, "Dark theme disabled", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
 
-    }
 
     // Retrieves value of string-type setting "key"
-    private String readStringSetting(String key) {
+    private String getStringFunc(String key) {
         return PreferenceManager.getDefaultSharedPreferences(this).getString(key, "-1");
     }
 
     // Retrieves value of int-type setting "key"
-    private Integer readIntSetting(String key) {
+    private Integer getIntFunc(String key) {
         return PreferenceManager.getDefaultSharedPreferences(this).getInt(key, -1);
     }
 
     // Retrieves value of switch-type setting "key"
-    private Boolean readBooleanSetting(String key) {
+    private Boolean getBoolFunc(String key) {
         return PreferenceManager.getDefaultSharedPreferences(this).getBoolean(key, false);
     }
 
     // Sets the "key" string setting to the desired "value"
-    private void setStringSetting(String key, String value) {
+    private void setStringFunc(String key, String value) {
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString(key, value).apply();
     }
 
     // Sets the "key" int setting to the desired "value"
-    private void setIntSetting(String key, Integer value) {
+    private void setIntFunc(String key, Integer value) {
         PreferenceManager.getDefaultSharedPreferences(this).edit().putInt(key, value).apply();
     }
 
     // Sets the "key" switch setting to the desired "value"
-    private void setBooleanSetting(String key, Boolean value) {
+    private void setBoolFunc(String key, Boolean value) {
         PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(key, value).apply();
     }
 
@@ -213,7 +190,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
     private void refreshUI() {
         finish();
-        startActivity(new Intent(this, com.uoa.myapplication.SettingsActivity.class));
+        startActivity(new Intent(this, MySettings.class));
         overridePendingTransition(0, 0);
     }
 

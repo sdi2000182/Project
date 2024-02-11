@@ -40,7 +40,7 @@
     <string name="gas_sensor_check_description">Description of Gas Sensor Check</string>
     <string name="gas_sensor_slider_description">Description of Gas Sensor Slider</string>
 
-    <string name="sensorActive">Active</string>
+    <string name="sensorActive">Activate Sensor</string>
     <string name="smoke1">Smoke Sensor</string>
     <string name="gas1">Gas Sensor</string>
     <string name="temp1">Temperature Sensor</string>
@@ -54,5 +54,12 @@
     <string name="uv_check_description" />
     <string name="sensor_active_description" />
     <string name="uv1_description" />
+
+    <string name="qos">QoS</string>
+    <string name="qos0">At most one</string>
+    <string name="qos1">At least one</string>
+    <string name="qos2">Exactly one</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

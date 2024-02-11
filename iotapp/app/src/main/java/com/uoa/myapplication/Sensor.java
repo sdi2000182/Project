@@ -5,23 +5,23 @@ import androidx.annotation.NonNull;
 public class Sensor {
 
     private String type;
-    private Float min;
-    private Float max;
-    private Float current;
+    private Float Minimum;
+    private Float Maximum;
+    private Float SliderValue;
 
     public Sensor() {}
 
-    public Sensor(String type, Float min, Float max, Float current) {
+    public Sensor(String type, Float Minimum, Float Maximum, Float SliderValue) {
         this.type = type;
-        this.min = min;
-        this.max = max;
-        this.current = current;
+        this.Minimum = Minimum;
+        this.Maximum = Maximum;
+        this.SliderValue = SliderValue;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "type:" + getType() + ";min:" + getMin() + ";max:" + getMax() + ";current:" + getCurrent();
+        return "type:" + getType() + ";Minimum:" + getMinimum() + ";Maximum:" + getMaximum() + ";SliderValue:" + getSliderValue();
     }
 
     public String getType() {
@@ -32,28 +32,28 @@ public class Sensor {
         this.type = type;
     }
 
-    public Float getMin() {
-        return min;
+    public Float getMinimum() {
+        return Minimum;
     }
 
-    public void setMin(Float min) {
-        this.min = min;
+    public void setMinimum(Float Minimum) {
+        this.Minimum = Minimum;
     }
 
-    public Float getMax() {
-        return max;
+    public Float getMaximum() {
+        return Maximum;
     }
 
-    public void setMax(Float max) {
-        this.max = max;
+    public void setMaximum(Float Maximum) {
+        this.Maximum = Maximum;
     }
 
-    public Float getCurrent() {
-        return current;
+    public Float getSliderValue() {
+        return SliderValue;
     }
 
-    public void setCurrent(Float current) {
-        this.current = current;
+    public void setSliderValue(Float SliderValue) {
+        this.SliderValue = SliderValue;
     }
 
 }

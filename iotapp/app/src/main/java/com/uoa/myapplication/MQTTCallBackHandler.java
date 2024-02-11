@@ -25,6 +25,15 @@ public class MQTTCallBackHandler extends Service implements MqttCallbackExtended
     MQTTCallBackHandler(CallBackListener callBackListener) {
         this.listener = callBackListener;
     }
+    @Override
+    public void deliveryComplete(IMqttDeliveryToken token) {
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {
@@ -41,14 +50,6 @@ public class MQTTCallBackHandler extends Service implements MqttCallbackExtended
         listener.onMessageArrived(topic, message);
     }
 
-    @Override
-    public void deliveryComplete(IMqttDeliveryToken token) {
-    }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 
 }

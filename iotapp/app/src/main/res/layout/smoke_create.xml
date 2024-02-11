@@ -40,7 +40,7 @@
             android:contentDescription="@string/tabs_description"
             app:layout_constraintTop_toBottomOf="@+id/createSmokeSensor"
             app:layout_constraintVertical_bias="0.109"
-            app:values="@array/minmaxGAS" />
+            app:values="@array/MinimumMaximumGAS" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/SmokeSensorButton"

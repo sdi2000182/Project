@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditTextPreference
-        android:key="last_will_topic"
+        android:key="lwTopic"
         app:defaultValue="@string/empty"
         app:icon="@drawable/ic_topic"
         android:textColor="@android:color/black"
@@ -11,7 +11,7 @@
         app:useSimpleSummaryProvider="true" />
 
     <EditTextPreference
-        android:key="last_will_payload"
+        android:key="lwPayload"
         app:defaultValue="@string/empty"
         app:icon="@drawable/ic_payload"
         app:title="@string/lwPayload"
@@ -22,12 +22,12 @@
         app:entries="@array/qosTypes"
         app:entryValues="@array/qosLevels"
         app:icon="@drawable/ic_qos"
-        app:key="last_will_qos"
+        app:key="lwQOS"
         app:title="@string/lwQOS"
         app:useSimpleSummaryProvider="true" />
 
     <CheckBoxPreference
-        android:key="last_will_retain"
+        android:key="lwRetain"
         app:defaultValue="false"
         app:icon="@drawable/ic_retain"
         app:title="@string/lwRetain" />

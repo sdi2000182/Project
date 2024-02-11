@@ -18,14 +18,9 @@
         android:contentDescription="@string/temp_sensor_description" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
-
-
-
-
 
     </LinearLayout>
 
@@ -35,26 +30,27 @@
         android:layout_height="wrap_content"
         android:valueFrom="-5f"
         android:valueTo="80f"
-        app:values="@array/minmaxTEMP"
+        app:values="@array/MinimumMaximumTEMP"
         android:contentDescription="@string/temp_sensor_slider_description" />
+
     <TextView
         android:id="@+id/tempSensorActiveTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="75dp"
+        android:contentDescription="@string/temp_sensor_active_description"
         android:text="@string/sensorActive"
         android:textStyle="bold"
-        android:typeface="serif"
-        android:contentDescription="@string/temp_sensor_active_description" />
-
+        android:typeface="serif" />
 
     <CheckBox
         android:id="@+id/tempSensorActiveCheckBox"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:buttonTint="@android:color/holo_blue_dark"
+        android:layout_marginStart="-10dp"
+        android:buttonTint="@color/orange_light"
+        android:contentDescription="@string/temp_sensor_check_description"
         android:text="@string/empty"
-        android:textSize="20sp"
-        android:contentDescription="@string/temp_sensor_check_description" />
+        android:textSize="20sp" />
 
 </LinearLayout>

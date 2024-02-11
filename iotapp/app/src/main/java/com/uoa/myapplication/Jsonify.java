@@ -17,56 +17,54 @@ import java.util.List;
 
 public class Jsonify {
 
-    public static List<Sensor> getJsonContent(Context context, String file, boolean loadDefault) {
-        InputStream is = null;
-        FileInputStream fis = null;
-        StringBuilder sb = new StringBuilder();
+    public static List<Sensor> retrieveSensorData(Context context, String filename, boolean loadDefault) {
+        InputStream inputStream = null;
+        StringBuilder stringBuilder = new StringBuilder();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type sensorListType = new TypeToken<List<Sensor>>() {}.getType();
 
         if (loadDefault) {
             try {
-                is = context.getResources().openRawResource(R.raw.default_sensors);
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String text;
-                while ((text = br.readLine()) != null) sb.append(text).append("\n");
+                inputStream = context.getResources().openRawResource(R.raw.smokegas);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) stringBuilder.append(line).append("\n");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (is != null) {
+                if (inputStream != null) {
                     try {
-                        is.close();
+                        inputStream.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
         } else {
+            FileInputStream fileInputStream = null;
             try {
-                fis = context.openFileInput(file);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-                String text;
-                while ((text = br.readLine()) != null) sb.append(text).append("\n");
+                fileInputStream = context.openFileInput(filename);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) stringBuilder.append(line).append("\n");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (fis != null) {
+                if (fileInputStream != null) {
                     try {
-                        fis.close();
+                        fileInputStream.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        return gson.fromJson(sb.toString(), sensorListType);
+        return gson.fromJson(stringBuilder.toString(), sensorListType);
     }
 
-    public static void putJsonContent(Context context, String file, List<Sensor> sensors) {
-        FileOutputStream fos = null;
+    public static void saveSensorData(Context context, String filename, List<Sensor> sensors) {
+        FileOutputStream fileOutputStream = null;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        // Convert all the sensor objects to JSON format
         StringBuilder jsonContent = new StringBuilder();
         jsonContent.append("[\n");
         for (int i = 0; i < sensors.size(); i++) {
@@ -75,22 +73,19 @@ public class Jsonify {
             jsonContent.append("\n");
         }
         jsonContent.append("]\n");
-
-        // Store JSON string to given file (create/overwrite)
         try {
-            fos = context.openFileOutput(file, Context.MODE_PRIVATE);
-            fos.write(jsonContent.toString().getBytes());
+            fileOutputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            fileOutputStream.write(jsonContent.toString().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fos != null) {
+            if (fileOutputStream != null) {
                 try {
-                    fos.close();
+                    fileOutputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
 }

@@ -1,4 +1,5 @@
 package com.uoa.myapplication;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class SmokeCreate extends Fragment implements View.OnClickListener {
     }
 
     private SmokeSensorCreateListener listener;
-    private CreateSensorViewModel viewModel;
+    private myViewModel viewModel;
 
     @Override
     public void onAttach(@NotNull Context context) {
@@ -42,7 +43,7 @@ public class SmokeCreate extends Fragment implements View.OnClickListener {
         AppCompatButton createBtn = view.findViewById(R.id.SmokeSensorButton);
         createBtn.setOnClickListener(this);
         // Setup viewModel to share data with parent activity
-        viewModel = new ViewModelProvider(requireActivity()).get(CreateSensorViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(myViewModel.class);
         return view;
     }
 
@@ -61,8 +62,8 @@ public class SmokeCreate extends Fragment implements View.OnClickListener {
 
     private void updateValues() {
         RangeSlider slider = requireView().findViewById(R.id.SmokeSensorRange);
-        viewModel.setSmokeMin(slider.getValues().get(0));
-        viewModel.setSmokeMax(slider.getValues().get(1));
+        viewModel.setSmokeMinimum(slider.getValues().get(0));
+        viewModel.setSmokeMaximum(slider.getValues().get(1));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.uoa.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,17 +9,18 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class MyAdapter extends FragmentPagerAdapter {
 
-    private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
-    private final ArrayList<String> mFragmentTitles = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitles = new ArrayList<>();
 
-    public FragmentAdapter(FragmentManager fm) {
-        super(fm);
+    public MyAdapter(FragmentManager fm) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
@@ -35,9 +37,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         return mFragmentList.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
+    public void addFragment(@NonNull Fragment fragment, @NonNull String title) {
         mFragmentList.add(fragment);
         mFragmentTitles.add(title);
     }
-
 }

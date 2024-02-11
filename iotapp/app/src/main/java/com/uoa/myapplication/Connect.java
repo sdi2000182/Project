@@ -3,15 +3,13 @@ package com.uoa.myapplication;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-//import com.uoa.myapplication.MQTTCallBackHandler;
-
+import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
 
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Map;
@@ -21,16 +19,15 @@ public class Connect extends MqttAsyncClient {
 
     private Context context;
     // Topics to write to:
-    final static String clientTopicPrefix = "iot_device1";
+    static String topic1 = "iot_device";
     // Topics to listen to:
-    final static String serverTopicPrefix = "server";
+    final static String serverTopicPrefix = "serverstopics/";
     // Preferences
     private String sessionID = "";
     private String serverIp = "";
     private int serverPort = 1883;
     private String serverUri = "";
     private int qos = 2;
-    private final int timeOutTime = MqttConnectOptions.CONNECTION_TIMEOUT_DEFAULT;
     private String lastWillTopic = "";
     private String lastWillPayload = "";
     private int lastWillQos = 0;
@@ -45,7 +42,7 @@ public class Connect extends MqttAsyncClient {
     private String message = "";
     private boolean retain;
 
-    public Connect(String serverURI, String sessionId, MemoryPersistence persistence, Context context, com.uoa.myapplication.MQTTCallBackHandler.CallBackListener listener) throws MqttException {
+    public Connect(String serverURI, String sessionId, MemoryPersistence persistence, Context context, MQTTCallBackHandler.CallBackListener listener) throws MqttException {
         super(serverURI, sessionId, persistence);
         setContext(context);
         setServerUri(serverURI);
@@ -57,7 +54,7 @@ public class Connect extends MqttAsyncClient {
         getConnectOptions();
         setPubTopic("");
         setSubTopic("");
-        setCallback(new com.uoa.myapplication.MQTTCallBackHandler(listener));
+        setCallback(new MQTTCallBackHandler(listener));
     }
 
     public MqttConnectOptions getConnectOptions() {
@@ -65,8 +62,6 @@ public class Connect extends MqttAsyncClient {
 
         MqttConnectOptions connOptions = new MqttConnectOptions();
         connOptions.setServerURIs(new String[]{getServerUri()});
-        connOptions.setConnectionTimeout(getTimeOutTime());
-        connOptions.setKeepAliveInterval(getKeepAliveTime());
         connOptions.setHttpsHostnameVerificationEnabled(isSsl());
         if (isUseAuth() && !getUsername().isEmpty() && !getPassword().isEmpty()) {
             connOptions.setUserName(getUsername());
@@ -81,11 +76,9 @@ public class Connect extends MqttAsyncClient {
         return connOptions;
     }
 
-    // Stores all current preferences in a hash map of type <prefKey, prefValue>
     private void updateConnectionOptions() {
         Map<String, String> options = (Map<String, String>) PreferenceManager.getDefaultSharedPreferences(getContext()).getAll();
 
-        // Read all preferences and initiate class members
         for (Map.Entry<String, String> entry : options.entrySet()) {
             switch (entry.getKey()) {
                 case "sessionId":
@@ -114,9 +107,6 @@ public class Connect extends MqttAsyncClient {
                 case "lwRetain":
                     setLastWillRetain(String.valueOf(entry.getValue()).equals("true"));
                     break;
-                case "use_auth":
-                    setUseAuth(String.valueOf(entry.getValue()).equals("true"));
-                    break;
                 case "username":
                     setUsername(entry.getValue());
                     break;
@@ -125,6 +115,9 @@ public class Connect extends MqttAsyncClient {
                     break;
                 case "ssl":
                     setSsl(String.valueOf(entry.getValue()).equals("true"));
+                    break;
+                case "useAuth":
+                    setUseAuth(String.valueOf(entry.getValue()).equals("true"));
                     break;
                 default:
                     break;
@@ -137,6 +130,16 @@ public class Connect extends MqttAsyncClient {
         ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         return Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
                 Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
+    }
+
+
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
+    }
+
+    public int getServerPort() {
+        return serverPort;
     }
 
     public Context getContext() {
@@ -159,14 +162,6 @@ public class Connect extends MqttAsyncClient {
         return serverIp;
     }
 
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
-    }
-
-    public int getServerPort() {
-        return serverPort;
-    }
-
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
@@ -185,14 +180,6 @@ public class Connect extends MqttAsyncClient {
 
     public void setQos(int qos) {
         this.qos = qos;
-    }
-
-    public int getTimeOutTime() {
-        return timeOutTime;
-    }
-
-    public int getKeepAliveTime() {
-        return MqttConnectOptions.KEEP_ALIVE_INTERVAL_DEFAULT;
     }
 
     public String getLastWillTopic() {
@@ -263,10 +250,19 @@ public class Connect extends MqttAsyncClient {
         return pubTopic;
     }
 
-    public void setPubTopic(String pubTopic) {
-//        this.pubTopic = clientTopicPrefix + getSessionID() + "/" + pubTopic;
-//            this.pubTopic = clientTopicPrefix
-            this.pubTopic = clientTopicPrefix;
+        public void setPubTopic(String pubTopic) {
+        String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String[] devices = {"2ec01d1bf9f7e71d", "b241a2ded5ae1a6b"};
+
+        if (androidId.equals(devices[0])) {
+            topic1 = "iot_device1";
+        } else if (androidId.equals(devices[1])) {
+            System.out.println("mphka");
+            topic1 = "iot_device2";
+        }
+        System.out.println("topic is " + topic1);
+        this.pubTopic = topic1;
+//        Toast.makeText(context, this.pubTopic, Toast.LENGTH_SHORT).show();
     }
 
     public String getSubTopic() {
@@ -274,6 +270,7 @@ public class Connect extends MqttAsyncClient {
     }
 
     public void setSubTopic(String subTopic) {
+
         this.subTopic = serverTopicPrefix + getSessionID() + "/" + subTopic;
     }
 
@@ -292,5 +289,7 @@ public class Connect extends MqttAsyncClient {
     public void setRetain(boolean retain) {
         this.retain = retain;
     }
+
+
 
 }

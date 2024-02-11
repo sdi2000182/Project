@@ -1,9 +1,9 @@
 <resources>
 
     <string-array name="qosTypes">
-        <item>At most once</item>
-        <item>At least once</item>
-        <item>Exactly once</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="qosLevels">
@@ -11,6 +11,19 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="qos_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qos_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 
     <string-array name="locationSUDO">
         <item>37.96809452684323, 23.76630586399502</item>
@@ -26,22 +39,22 @@
         <item>3</item>
     </string-array>
 
-    <array name="minmaxSMOKE">
+    <array name="MinimumMaximumSMOKE">
         <item>0.0</item>
         <item>0.25</item>
     </array>
 
-    <array name="minmaxGAS">
+    <array name="MinimumMaximumGAS">
         <item>0.0</item>
         <item>11.0</item>
     </array>
 
-    <array name="minmaxTEMP">
+    <array name="MinimumMaximumTEMP">
         <item>-5</item>
         <item>80</item>
     </array>
 
-    <array name="minmaxUV">
+    <array name="MinimumMaximumUV">
         <item>0.0</item>
         <item>11.0</item>
     </array>

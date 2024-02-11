@@ -13,49 +13,52 @@ import org.jetbrains.annotations.NotNull;
 
 public class GasFrag extends Fragment {
 
-    private Float min;
-    private Float max;
-    private Float current;
+    private Float Minimum;
+    private Float Maximum;
+    private Float SliderValue;
+    public GasFrag(){
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         assert getArguments() != null;
-        setMin(getArguments().getFloatArray("args")[0]);
-        setMax(getArguments().getFloatArray("args")[1]);
-        setCurrent(getArguments().getFloatArray("args")[2]);
+        setMinimum(getArguments().getFloatArray("args")[0]);
+        setMaximum(getArguments().getFloatArray("args")[1]);
+        setSliderValue(getArguments().getFloatArray("args")[2]);
         return inflater.inflate(R.layout.gas, parent, false);
     }
 
     @Override
     public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
         Slider slider = view.findViewById(R.id.gasSensorSlider);
-        slider.setValueFrom(getMin());
-        slider.setValueTo(getMax());
-        slider.setValue(getCurrent());
+        slider.setValueFrom(getMinimum());
+        slider.setValueTo(getMaximum());
+        slider.setValue(getSliderValue());
     }
 
-    public Float getMin() {
-        return min;
+    public Float getMinimum() {
+        return Minimum;
     }
 
-    public void setMin(Float min) {
-        this.min = min;
+    public void setMinimum(Float Minimum) {
+        this.Minimum = Minimum;
     }
 
-    public Float getMax() {
-        return max;
+    public Float getMaximum() {
+        return Maximum;
     }
 
-    public void setMax(Float max) {
-        this.max = max;
+    public void setMaximum(Float Maximum) {
+        this.Maximum = Maximum;
     }
 
-    public Float getCurrent() {
-        return current;
+    public Float getSliderValue() {
+        return SliderValue;
     }
 
-    public void setCurrent(Float current) {
-        this.current = current;
+    public void setSliderValue(Float SliderValue) {
+        this.SliderValue = SliderValue;
     }
 
 }

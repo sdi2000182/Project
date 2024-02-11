@@ -22,7 +22,7 @@ public class GasCreate extends Fragment implements View.OnClickListener {
     }
 
     private GasSensorCreateListener listener;
-    private CreateSensorViewModel viewModel;
+    private myViewModel viewModel;
 
     @Override
     public void onAttach(@NotNull Context context) {
@@ -43,7 +43,7 @@ public class GasCreate extends Fragment implements View.OnClickListener {
         AppCompatButton createBtn = view.findViewById(R.id.GasButton);
         createBtn.setOnClickListener(this);
         // Setup viewModel to share data with parent activity
-        viewModel = new ViewModelProvider(requireActivity()).get(CreateSensorViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(myViewModel.class);
         return view;
     }
 
@@ -62,8 +62,8 @@ public class GasCreate extends Fragment implements View.OnClickListener {
 
     private void updateValues() {
         RangeSlider slider = requireView().findViewById(R.id.GasRangeSlider);
-        viewModel.setGasMin(slider.getValues().get(0));
-        viewModel.setGasMax(slider.getValues().get(1));
+        viewModel.setGasMinimum(slider.getValues().get(0));
+        viewModel.setGasMaximum(slider.getValues().get(1));
     }
 
 }

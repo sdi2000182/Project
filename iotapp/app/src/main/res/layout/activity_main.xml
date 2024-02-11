@@ -38,6 +38,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="60dp"
                 android:layout_height="?attr/actionBarSize"
+                android:textColor="@android:color/white"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
@@ -57,7 +58,6 @@
             app:tabMode="auto"
             app:tabTextColor="@color/white" />
 
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -67,17 +67,22 @@
         android:contentDescription="@string/vp_description"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/orange_light"
+        android:contentDescription="@string/activate_tethering"
         android:src="@drawable/ic_tethering_on"
-        app:maxImageSize="45dp"
-        android:backgroundTint="#4285F4"
-        android:contentDescription="@string/activate_tethering" />
+        app:maxImageSize="45dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="101dp"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="Connect to Server" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

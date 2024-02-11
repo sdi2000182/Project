@@ -5,14 +5,14 @@
     <PreferenceCategory app:title="Authentication">
 
         <SwitchPreferenceCompat
-            android:key="use_auth"
+            android:key="useAuth"
             android:title="@string/credentials"
             app:defaultValue="false"
             app:icon="@drawable/ic_use_credentials" />
 
         <EditTextPreference
             app:defaultValue="@string/empty"
-            app:dependency="use_auth"
+            app:dependency="useAuth"
             app:icon="@drawable/ic_user"
             app:key="username"
             app:title="@string/setusername"
@@ -20,7 +20,7 @@
 
         <EditTextPreference
             app:defaultValue="@string/empty"
-            app:dependency="use_auth"
+            app:dependency="useAuth"
             app:icon="@drawable/ic_key"
             app:key="password"
             app:title="@string/setpassword"

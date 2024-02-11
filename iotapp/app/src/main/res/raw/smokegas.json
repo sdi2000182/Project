@@ -1,0 +1,14 @@
+[
+  {
+    "type": "smoke",
+    "Minimum": "0",
+    "Maximum": "0.25",
+    "SliderValue": "0.13"
+  },
+  {
+    "type": "gas",
+    "Minimum": "0",
+    "Maximum": "11",
+    "SliderValue": "5.5"
+  }
+]
