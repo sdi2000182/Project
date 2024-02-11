@@ -28,19 +28,49 @@ public class Data {
     }
 
     public Data(String json) {
-        try {
+
+
             JSONObject jsonData = new JSONObject(json);
-            this.latitude = jsonData.getDouble("latitude");
-            this.longitude = jsonData.getDouble("longitude");
-            this.battery = jsonData.getDouble("battery");
-            this.smoke = jsonData.getDouble("smoke");
-            this.gas = jsonData.getDouble("gas");
-            this.temperature = jsonData.getDouble("temperature");
-            this.uv = jsonData.getDouble("uv");
-        } catch (JSONException e) {
-            throw new RuntimeException("Error parsing JSON data: " + e.getMessage());
-        }
+            try {
+                this.latitude = jsonData.getDouble("latitude");
+            } catch (JSONException e){
+                this.latitude = 0.0;
+            }
+            try {
+                this.longitude = jsonData.getDouble("longitude");
+            }catch(JSONException e){
+                this.longitude = 0.0;
+            }
+            try {
+                this.battery = jsonData.getDouble("battery");
+            }catch (JSONException e){
+                this.battery = 0.0;
+            }
+            try {
+                this.smoke = jsonData.getDouble("smoke");
+            }catch(JSONException e){
+                this.smoke = 0.0;
+            }
+            try {
+                this.gas = jsonData.getDouble("gas");
+            }catch (JSONException e){
+                this.gas = 0.0;
+            }
+            try {
+                this.temperature = jsonData.getDouble("temp");
+            }catch(JSONException e){
+                this.temperature = 0.0;
+            }
+            try {
+                this.uv = jsonData.getDouble("uv");
+            }catch (JSONException e){
+                this.uv = 0.0;
+            }
+
+
     }
+
+
 
     public double getLatitude() {
         return latitude;
