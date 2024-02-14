@@ -13,7 +13,8 @@ Within the Settings menu, users encounter several configurable parameters: Edit 
 for the input of the communication IP address with the Edge Server; Port permits specification of the
 communication port with the Edge Server. Manual Location provides the option to toggle between GPS-based
 or predefined location acquisition. If manual selection is made, two additional settings become available:
-Choose File selects between provided files for pronunciation; TimeSpace designates the interval for transmitting measurement vectors.
+Choose File selects between provided files for pronunciation; TimeSpace designates the interval for 
+transmitting measurement vectors.
 
 Periodically, at intervals of 10 seconds, the application verifies its internet connectivity through the 
 ConnectivityManager. Notification of connectivity loss is promptly relayed to the user interface.
@@ -28,5 +29,4 @@ Communication with the MQTT Server is facilitated for both receiving notificatio
 data via distinct topics. To receive distress notifications, the application subscribes to the "notifications"
 topic, extracting pertinent data from received JSON files, including hazard level and distance from 
 the hazard point. Conversely, data transmission to the server occurs via subscription to the android topic 
-encapsulating location vectors and device identification within transmitted JSON files (where deviceID 
-is denoted as 3 to indicate the android device).
+encapsulating location vectors and device identification within transmitted JSON files.
