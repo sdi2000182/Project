@@ -60,18 +60,27 @@ public class IotDevice {
         return Functions.calculateDistance(androidLatitude, androidLongitude, latitude, longitude, "M");
     }
 
-    public void alertDistanceToAndroid(IMqttClient client, double distance, String androidTopic, String iotDeviceID) throws MqttException {
+    public void alertDistanceToAndroid(IMqttClient client, double distance,  int androidID, String danger, int iotDeviceID) throws MqttException {
         try {
-            JSONObject distanceJson = new JSONObject();
-            distanceJson.put("Distance_to_" + iotDeviceID, distance);
-            String distanceMessage = distanceJson.toString();
+            JSONObject androidInfoJson = new JSONObject();
+            androidInfoJson.put("android_id", androidID);
+            androidInfoJson.put("danger", danger);
+            androidInfoJson.put("distance_from_iot", distance);
 
-            MqttMessage distanceMqttMessage = new MqttMessage(distanceMessage.getBytes());
-            client.publish(androidTopic, distanceMqttMessage);
+
+           // String serverIdentifier = "server";
+           // String serverPayload = serverIdentifier + ":" + androidInfoJson.toString();
+            String serverPayload = androidInfoJson.toString();
+
+            System.out.println("JSON Payload: " + serverPayload);
+
+            MqttMessage androidMessage = new MqttMessage(serverPayload.getBytes());
+            client.publish("android", androidMessage);
         } catch (JSONException e) {
-            System.err.println("Error creating distance JSON: " + e.getMessage());
+            System.err.println("Error creating Android info JSON: " + e.getMessage());
         }
     }
+
 
     public static boolean checkHighDanger(String danger1, String danger2) {
         return danger1.equals("high") && danger2.equals("high");

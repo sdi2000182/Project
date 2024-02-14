@@ -15,8 +15,6 @@ public class main {
 
     public static void main(String[] args) throws Exception {
 
-
-
         System.out.println("Hello and welcome!\n");
         Connection dbConnection;
         dbConnection = DbConnection.connect();
@@ -44,22 +42,53 @@ public class main {
                 System.out.println("Subscribed to topic: " + topic);
             }
 
+
             IotDevice iotDevice1 = new IotDevice(client, "iot_device1");
             IotDevice iotDevice2 = new IotDevice(client, "iot_device2");
+            String json = "{ \"android_id\": 1, \"latitude\": 37.7749, \"longitude\": -122.4194 }";
+            AndroidData androidData = new AndroidData(json);
 
-            MessageProcessor messageProcessor = new MessageProcessor(iotDevice1, iotDevice2, dbConnection);
+            MessageProcessor messageProcessor = new MessageProcessor(iotDevice1, iotDevice2, dbConnection,androidData);
 
 
             client.setCallback(new MqttCallback() {
                 @Override
                 public void connectionLost(Throwable cause) {
                     System.out.println("Connection lost: " + cause.getMessage());
+                    if (cause instanceof MqttException) {
+                        MqttException mqttException = (MqttException) cause;
+                        System.out.println("Detailed reason: ");
+                        mqttException.printStackTrace();
+                    }
+                    // Additional code if needed
 
                 }
 
                 @Override
+
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    messageProcessor.processMessage(topic,message,client);
+
+
+                    //System.out.println(topic);
+                    if (topic.equals("iot_device1") || topic.equals("iot_device2")) {
+
+                        messageProcessor.processMessage(topic, message, client);
+                    }
+
+
+                    if(topic.startsWith("android")){
+
+                        String payload = new String(message.getPayload());
+                        String[] parts = payload.split(":", 2);
+
+                        if (parts.length == 2 && parts[0].equals("server")) {
+                            // This is a message from the server, do not process
+                         // System.out.println("Received a message from the server: " + parts[1]);
+                        } else {
+                            // This is a message from an external source, proceed with regular processing
+                            messageProcessor.processAndroidMessage(topic, message, client);
+                        }
+                    }
 
                 }
 
@@ -80,9 +109,6 @@ public class main {
 
 
     }
-
-
-
 
 
 }

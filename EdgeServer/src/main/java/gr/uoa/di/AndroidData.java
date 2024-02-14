@@ -1,5 +1,6 @@
 package gr.uoa.di;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,18 +13,20 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 
 public class AndroidData {
-    private int androidId;
-    private double latitude;
-    private double longitude;
+    private int androidId = 0 ;
+    private double latitude =0;
+    private double longitude = 0;
 
-    public AndroidData(String json) {
+    private String danger;
+
+    public AndroidData(String json) throws Exception {
         try {
             JSONObject jsonData = new JSONObject(json);
             this.androidId = jsonData.getInt("android_id");
             this.latitude = jsonData.getDouble("latitude");
             this.longitude = jsonData.getDouble("longitude");
         } catch (JSONException e) {
-            throw new RuntimeException("Error parsing Android JSON data: " + e.getMessage());
+            throw new Exception(" Error deseriazing message");
         }
     }
 
@@ -40,6 +43,7 @@ public class AndroidData {
     }
 
     public void insertAndroidData(Connection connection) {
+
         String insertQuery = "INSERT INTO Android_Data (Timestamp, Android_ID, Longitude, Latitude) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {

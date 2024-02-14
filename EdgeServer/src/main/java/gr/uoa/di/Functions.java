@@ -29,21 +29,28 @@ public class Functions {
         }
     }
 
-    public static void alertAndroid(String topic, String danger, MqttClient client) {
-        if (danger.equals("high") || danger.equals("medium")) {
-            String androidTopic = "android";
-            String iotDeviceId = topic.replace("iot_device", "");
-            String notificationMessage = "Danger level: " + danger + " (From IoT Device " + iotDeviceId + ")";
+    /*public static void alertAndroid(String topic, String danger, MqttClient client) {
 
-            MqttMessage notificationMqttMessage = new MqttMessage(notificationMessage.getBytes());
+
+            String iotDeviceId = topic.replace("iot_device", "");
+           // String notificationMessage = "Danger level: " + danger + " (From IoT Device " + iotDeviceId + ")";
+
+
+
+          //  String serverIdentifier = "server";
+          //  String serverPayload = serverIdentifier + ":" + notificationMessage;
+
+          //  MqttMessage notificationMqttMessage = new MqttMessage(serverPayload.getBytes());
+
+
 
             try {
-                client.publish(androidTopic, notificationMqttMessage);
+                client.publish("android", notificationMqttMessage);
             } catch (MqttException e) {
                 System.err.println("Error publishing Android alert message: " + e.getMessage());
             }
-        }
-    }
+
+    }*/
 
 
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/createUvSensor"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/uv1_description"
+        android:text="@string/uv1"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/uvSensorSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/uv_slider_description"
+        android:valueFrom="0f"
+        android:valueTo="11f"
+        app:values="@array/MinimumMaximumUV" />
+
+    <TextView
+        android:id="@+id/uvActive"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:contentDescription="@string/sensor_active_description"
+        android:text="@string/sensorActive"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <CheckBox
+        android:id="@+id/uvCheck"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:buttonTint="@color/orange_light"
+        android:contentDescription="@string/uv_check_description"
+        android:text="@string/empty"
+        android:textSize="20sp" />
+
+</LinearLayout>
