@@ -252,16 +252,16 @@ public class Connect extends MqttAsyncClient {
 
         public void setPubTopic(String pubTopic) {
         String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        String[] devices = {"2ec01d1bf9f7e71d", "b241a2ded5ae1a6b"};
+//        String[] devices = {"2ec01d1bf9f7e71d", "b241a2ded5ae1a6b"};
 
-        if (androidId.equals(devices[0])) {
-            topic1 = "iot_device1";
-        } else if (androidId.equals(devices[1])) {
-            System.out.println("mphka");
-            topic1 = "iot_device2";
-        }
+//        if (androidId.equals(devices[0])) {
+//            topic1 = "iot_device1";
+//        } else if (androidId.equals(devices[1])) {
+//            System.out.println("mphka");
+//            topic1 = "iot_device2";
+//        }
         System.out.println("topic is " + topic1);
-        this.pubTopic = topic1;
+        this.pubTopic = topic1 + "/" + androidId;
 //        Toast.makeText(context, this.pubTopic, Toast.LENGTH_SHORT).show();
     }
 

@@ -49,10 +49,12 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -290,7 +292,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, MySettings.class));
             return true;
         } else if (itemId == R.id.createOpt) {
-            startActivityForResult(new Intent(this, SensorActivity.class), NEW_SENSOR_REQUEST_CODE);
+            Intent intent = new Intent(this, SensorActivity.class);
+            ArrayList<String> sensorTypes = new ArrayList<>();
+
+            for (Sensor sensor : sensors) {
+                sensorTypes.add(sensor.getType());
+            }
+
+            intent.putStringArrayListExtra("sensorTypes", sensorTypes);
+            startActivityForResult(intent, NEW_SENSOR_REQUEST_CODE);
             return true;
         }else if (itemId == R.id.exitOpt) {
             Jsonify.saveSensorData(this, sensorConfigFile, sensors);
@@ -348,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
             switch (sensors.get(sensor).getType()) {
                 case "smoke":
                     fragment = new SmokeFrag();
-                    adapter.addFragment(fragment, getResources().getString(R.string.titleSmoke) + " " + ++smokeCounter);
+                    adapter.addFragment(fragment, getResources().getString(R.string.titleSmoke));
                     break;
                 case "gas":
                     fragment = new GasFrag();
@@ -356,11 +366,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "temp":
                     fragment = new TempFrag();
-                    adapter.addFragment(fragment, getResources().getString(R.string.titleTemp) + " " + ++tempCounter);
+                    adapter.addFragment(fragment, getResources().getString(R.string.titleTemp) );
                     break;
                 case "uv":
                     fragment = new UVFrag();
-                    adapter.addFragment(fragment, getResources().getString(R.string.titleUv) + " " + ++uvCounter);
+                    adapter.addFragment(fragment, getResources().getString(R.string.titleUv));
                     break;
                 default:
                     break;
