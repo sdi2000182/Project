@@ -18,10 +18,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_sensor"
         android:label="@string/name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_sensor_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomAppTheme"
         android:windowSoftInputMode="stateHidden|adjustResize">

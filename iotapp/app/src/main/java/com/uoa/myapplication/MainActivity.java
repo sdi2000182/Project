@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "gas":
                     fragment = new GasFrag();
-                    adapter.addFragment(fragment, getResources().getString(R.string.titleGas) + " " + ++gasCounter);
+                    adapter.addFragment(fragment, getResources().getString(R.string.titleGas));
                     break;
                 case "temp":
                     fragment = new TempFrag();
