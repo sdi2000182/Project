@@ -11,7 +11,6 @@ public class main {
 
 
 
-    // Connect to the database
 
     public static void main(String[] args) throws Exception {
 
@@ -37,11 +36,11 @@ public class main {
             System.out.println("Connected to MQTT broker: " + broker);
 
 
-            for (String topic : topics) {
-                client.subscribe(topic);
-                System.out.println("Subscribed to topic: " + topic);
-            }
-
+//            for (String topic : topics) {
+//                client.subscribe(topic);
+//                System.out.println("Subscribed to topic: " + topic);
+//            }
+            client.subscribe("#");
 
             IotDevice iotDevice1 = new IotDevice(client, "iot_device1");
             IotDevice iotDevice2 = new IotDevice(client, "iot_device2");
@@ -60,7 +59,7 @@ public class main {
                         System.out.println("Detailed reason: ");
                         mqttException.printStackTrace();
                     }
-                    // Additional code if needed
+
 
                 }
 
@@ -70,7 +69,7 @@ public class main {
 
 
                     //System.out.println(topic);
-                    if (topic.equals("iot_device1") || topic.equals("iot_device2")) {
+                    if (topic.startsWith("iot_device") ) {
 
                         messageProcessor.processMessage(topic, message, client);
                     }

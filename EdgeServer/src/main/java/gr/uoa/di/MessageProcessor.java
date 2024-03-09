@@ -35,10 +35,10 @@ public class MessageProcessor {
 
 
 
-        if (topic.startsWith("iot_device1")) {
+        if (topic.startsWith("iot_device1/4f1a9607fbabf94f")) {
             iotDeviceNumber = 1;
 
-        } else if (topic.startsWith("iot_device2")) {
+        } else if (topic.startsWith("iot_device1/d55d31a3469e73af")) {
             iotDeviceNumber = 2;
         }
 
