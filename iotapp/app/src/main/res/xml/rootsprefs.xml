@@ -47,17 +47,7 @@
             />
 
 
-        <Preference
-            app:fragment="com.uoa.myapplication.SettingsActivity$LastWillSettings"
-            app:icon="@android:drawable/ic_menu_send"
-            app:key="last_will_header"
-            app:title="@string/lw" />
 
-        <Preference
-            app:fragment="com.uoa.myapplication.SettingsActivity$SecuritySettings"
-            app:icon="@drawable/ic_lsec1"
-            app:key="simulation_settings_header"
-            app:title="@string/authentication" />
         <SwitchPreferenceCompat
             android:defaultValue="false"
             app:icon="@drawable/ic_c2"
